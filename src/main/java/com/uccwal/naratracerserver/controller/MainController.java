@@ -1,7 +1,10 @@
 package com.uccwal.naratracerserver.controller;
 
 
+import com.uccwal.naratracerserver.entity.FieldKeyword;
 import com.uccwal.naratracerserver.entity.TracerRequest;
+import com.uccwal.naratracerserver.repository.FieldKeywordRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 
 @Controller
 public class MainController {
+
+
 
     @GetMapping("/main")
     public String main(){
@@ -20,11 +27,18 @@ public class MainController {
         return "/page/main.html";
     }
 
+    @GetMapping("/main2")
+    public String main2(){
+
+        return "/page/main2.html";
+    }
+
     @GetMapping("/postSample")
     public String postSample(){
 
         return "/page/postSample.html";
     }
+
 
     private final String getTracerDataUrl = "http://localhost:8000/tracerData";
 

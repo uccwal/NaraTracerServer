@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}">
+
+<div layout:fragment="content">
+    <script>
+        function submitForm() {
+            var tracerData = {
+                category: "용역",
+                bidder: ["천안"],
+                titleLinkText: ["스마트", "보수", "솔루션"],
+                startDate: "2023-12-11",
+                endDate: "2023-12-23"
+            };
+
+            // AJAX 요청
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/postTracerData", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // 서버로부터 받은 응답을 처리하는 로직
+                    console.log(xhr.responseText);
+                }
+            };
+
+            // JavaScript 객체를 JSON 문자열로 변환하여 전송
+            xhr.send(JSON.stringify(tracerData));
+        }
+
+        // 페이지 로드 후 자동으로 실행
+        document.addEventListener("DOMContentLoaded", function() {
+            submitForm();
+        });
+    </script>
+</div>
+</html>
