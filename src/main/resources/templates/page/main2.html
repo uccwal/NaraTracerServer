@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}">
+
+<div layout:fragment="content">
+    <style>
+
+    </style>
+
+    <div>
+        <button id="ajax-trigger">Load Data via AJAX</button>
+        <button id="ajax-trigger-post">Load Data via AJAX POST</button>
+    </div>
+
+    <div id="example-table"></div>
+
+    <script>
+
+        var tablePost = new Tabulator("#example-table", {
+            height: "750px",
+            layout: "fitColumns",
+            placeholder: "No Data Set",
+            pagination: "local",
+            paginationSize: 100,
+            paginationSizeSelector: [20, 50, 100, 200],
+            movableColumns: true,
+            paginationCounter: "rows",
+            columns: [
+                { title: "업무", field: "category", sorter: "string", width: 70 },
+                {
+                    title: "공고번호-차수",
+                    field: "bidNumberLinkText",
+                    sorter: "string",
+                    width: 70,
+                    formatter: "link",
+                    formatterParams: {
+                        url: function (cell) {
+                            var workValue = cell.getRow().getData().titleLinkUrl;
+                            return workValue;
+                        },
+                        target: "_blank",
+                    },
+                },
+                { title: "분류", field: "urgency", sorter: "string", width: 70 },
+                { title: "공고명", field: "titleLinkText", sorter: "string", width: 400 },
+                { title: "수요기관", field: "bidder", sorter: "string" },
+                { title: "공고기관", field: "organization", sorter: "string" },
+                { title: "입력일시", field: "bidStart", sorter: "string" },
+                { title: "입력마감일시", field: "bidEnd", sorter: "string" },
+                { title: "계약방법", field: "competitionType", sorter: "string" },
+            ],
+        });
+
+        document.getElementById("ajax-trigger-post").addEventListener("click", function () {
+            // AJAX 요청
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/postTracerData", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            var tracerData = {
+                category: '용역',
+                titleLinkText: ['광주', '문화', '학교'],
+                bidder: ['문화', '광주', '학교'],
+                startDate: '2023-12-10',
+                endDate: '2023-12-29',
+            };
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+
+                    // Tabulator에 데이터 설정
+                    tablePost.setData(data);
+                }
+            };
+
+            // JavaScript 객체를 JSON 문자열로 변환하여 전송
+            xhr.send(JSON.stringify(tracerData));
+        });
+
+    </script>
+</div>
+
+</html>

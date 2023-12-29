@@ -5,6 +5,178 @@
       layout:decorate="~{layouts/default_layout}">
 
 <div layout:fragment="content">
-main
+    <style>
+
+    </style>
+    <div class="align-items-start row">
+    <div class="col-sm-2">
+        <input type="date" id="startDate" class="form-control col">
+    </div>
+    <div class="col-sm-2">
+        <input type="date" id="endDate" class="form-control col">
+    </div>
+    </div>
+    <div>
+        <button id="get-trigger">Load Data via AJAX</button>
+        <button id="post-trigger">Load Data via AJAX POST</button>
+    </div>
+
+    <div id="example-table"></div>
+
+    <script>
+        var table = new Tabulator("#example-table", {
+            height:"650px",
+            layout:"fitColumns",
+            placeholder:"No Data Set",
+            pagination:"local",
+            paginationSize:100,
+            paginationSizeSelector:[20, 50, 100, 200],
+            movableColumns:true,
+            paginationCounter:"rows",
+            columns:[
+                {title:"업무", field:"category", sorter:"string", width:70},
+                {title:"공고번호-차수", field:"bidNumberLinkText", sorter:"string", width:70,
+                    formatter: "link",
+                    formatterParams: {
+                        url: function (cell) {
+                            // URL 생성 로직
+                            var workValue = cell.getRow().getData().titleLinkUrl;
+                            return workValue;
+                        },
+                        target: "_blank", // 새 창에서 열기
+                    },
+
+                },
+                {title:"분류", field:"urgency", sorter:"string",width:70},
+                {title:"공고명", field:"titleLinkText", sorter:"string",width:400},
+                {title:"공고기관", field:"bidder", sorter:"string"},
+                {title:"수요기관", field:"organization", sorter:"string"},
+                {title:"입력일시", field:"bidStart", sorter:"string"},
+                {title:"입력마감일시", field:"bidEnd", sorter:"string"},
+                {title:"계약방법", field:"competitionType", sorter:"string"},
+
+            ],
+        });
+        //trigger AJAX load on "Load Data via AJAX" button click
+        document.getElementById("get-trigger").addEventListener("click", function(){
+            table.setData("/getTracerData");
+        });
+
+
+
+        document.getElementById("post-trigger").addEventListener("click", function () {
+            // AJAX 요청
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/postTracerData", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            var endDateValue = $("#endDate").val();
+
+            // endDateValue를 Date 객체로 변환
+            var endDate = new Date(endDateValue);
+
+            // endDate의 시간을 23:59:59으로 설정
+            endDate.setHours(23);
+            endDate.setMinutes(59);
+            endDate.setSeconds(59);
+
+            // 변환된 endDate를 다시 문자열로 변환하여 사용
+            var formattedEndDate = `${endDate.getFullYear()}-${(endDate.getMonth() + 1).toString().padStart(2, '0')}-${endDate.getDate().toString().padStart(2, '0')} ${endDate.getHours()}:${endDate.getMinutes()}:${endDate.getSeconds()}`;
+
+            var tracerData = {
+                category: '용역',
+                titleLinkText: [
+                    "유지",
+                    "시스템",
+                    "운영",
+                    "유지관리",
+                    "유지보수",
+                    "고도화",
+                    "플랫폼",
+                    "산림청",
+                    "솔루션",
+                    "챗봇"
+                ],
+                bidder: [
+                    "한국사회보장정보원",
+                    "한국출판문화산업진흥원",
+                    "한국환경산업기술원",
+                    "정보통신산업진흥원",
+                    "인사혁신처",
+                    "소상공인시장진흥공단",
+                    "공정거래위원회",
+                    "한국공정거래조정원",
+                    "한국여성인권진흥원",
+                    "한국국토정보공사",
+                    "인천공항공사",
+                    "산림청",
+                    "산림교육원",
+                    "문화재청",
+                    "문화체육관광부",
+                    "SBA",
+                    "서울산업진흥원",
+                    "축산물품질평가원",
+                    "질병관리본부",
+                    "기초과학연구원",
+                    "연구개발특구진흥재단",
+                    "서울신용보증재단",
+                    "방송통신위원회",
+                    "한국관광공사",
+                    "법무부",
+                    "여성가족부",
+                    "금융위원회",
+                    "외교부",
+                    "국회사무처",
+                    "환경산업기술원",
+                    "대검찰청",
+                    "국방정보본부",
+                    "태권도진흥재단",
+                    "보건복지부",
+                    "인천국제공항공사",
+                    "국방",
+                    "국방부",
+                    "국방부(운영지원과)"
+                ],
+                startDate: $("#startDate").val(),
+                endDate:formattedEndDate
+            };
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+
+                    // Tabulator에 데이터 설정
+                    table.setData(data);
+                }
+            };
+
+            // JavaScript 객체를 JSON 문자열로 변환하여 전송
+            xhr.send(JSON.stringify(tracerData));
+        });
+        function getCurrentDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = (today.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 두 자리로 패딩
+            const day = today.getDate().toString().padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function getYesterdayDate() {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const year = yesterday.getFullYear();
+            const month = (yesterday.getMonth() + 1).toString().padStart(2, '0');
+            const day = yesterday.getDate().toString().padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        document.getElementById('startDate').value = getYesterdayDate();
+        document.getElementById('endDate').value = getCurrentDate();
+
+
+
+
+    </script>
 </div>
+
 </html>
