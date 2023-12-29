@@ -1,0 +1,68 @@
+CREATE DATABASE naratracer;
+
+CREATE TABLE field_keyword (
+                            field VARCHAR(50),
+                            id VARCHAR(50),
+                            keyword VARCHAR(50),
+                            PRIMARY KEY (field, keyword)
+);
+
+INSERT INTO field_keyword (field, id, keyword) VALUES ('titleLinkText', 'gfc', '유지');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('titleLinkText', 'gfc', '시스템');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('titleLinkText', 'gfc', '운영');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('titleLinkText', 'gfc', '유지관리');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('titleLinkText', 'gfc', '유지보수');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('titleLinkText', 'gfc', '고도화');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('titleLinkText', 'gfc', '플랫폼');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('titleLinkText', 'gfc', '산림청');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('titleLinkText', 'gfc', '솔루션');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('titleLinkText', 'gfc', '챗봇');
+
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '한국사회보장정보원');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '한국출판문화산업진흥원');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '한국환경산업기술원');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '정보통신산업진흥원');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '인사혁신처');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '소상공인시장진흥공단');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '공정거래위원회');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '한국공정거래조정원');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '한국여성인권진흥원');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '한국국토정보공사');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '인천공항공사');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '산림청');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '산림교육원');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '문화재청');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '문화체육관광부');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', 'SBA');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '서울산업진흥원');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '축산물품질평가원');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '질병관리본부');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '기초과학연구원');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '연구개발특구진흥재단');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '서울신용보증재단');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '방송통신위원회');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '한국관광공사');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '법무부');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '여성가족부');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '금융위원회');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '외교부');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '국회사무처');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '환경산업기술원');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '대검찰청');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '국방정보본부');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '태권도진흥재단');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '보건복지부');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '인천국제공항공사');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '국방');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '국방부');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '국방부(운영지원과)');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '국무조정실');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '농업진흥원');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '서울문화재단');
+INSERT INTO field_keyword (field, id, keyword) VALUES ('bidder', 'gfc', '중소벤처기업부');
+
+
+
+
+
+
