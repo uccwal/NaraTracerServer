@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/fieldKeywords")
+@RequestMapping("/api")
 public class FieldKeywordController {
 
     private final FieldKeywordRepository fieldKeywordRepository;
@@ -19,11 +19,6 @@ public class FieldKeywordController {
     @Autowired
     public FieldKeywordController(FieldKeywordRepository fieldKeywordRepository) {
         this.fieldKeywordRepository = fieldKeywordRepository;
-    }
-
-    @GetMapping("/keyword")
-    public String keyword() {
-        return "/page/keyword.html";
     }
 
     @GetMapping("/getKeyword")

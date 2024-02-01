@@ -5,6 +5,12 @@
       layout:decorate="~{layouts/default_layout}">
 
 <div layout:fragment="content">
+    <div>
+        <button id="get-trigger">Load Data via AJAX</button>
+        <button id="post-trigger">Load Data via AJAX POST</button>
+    </div>
+
+    <div id="example-table"></div>
     <script>
         function submitForm() {
             var tracerData = {
@@ -35,6 +41,48 @@
         document.addEventListener("DOMContentLoaded", function() {
             submitForm();
         });
+    </script>
+
+    <script>
+        var table = new Tabulator("#example-table", {
+            height:"650px",
+            placeholder:"No Data Set",
+            pagination:"local",
+            paginationSize:100,
+            paginationSizeSelector:[20, 50, 100, 200],
+            movableColumns:true,
+            paginationCounter:"rows",
+            columns:[
+                {title:"no", formatter:"rownum", hozAlign:"center", width:40 },
+                {title:"종류", field:"id.field", sorter:"string", formatter: formatType},
+                {title:"키워드", field:"id.keyword", sorter:"string"},
+
+
+            ],
+        });
+
+        function formatType(cell, formatterParams, onRendered) {
+            // cell.getRow().getData()를 통해 현재 행의 데이터를 가져올 수 있습니다.
+            var rowData = cell.getRow().getData();
+
+            // id.field 값이 "bidder"인 경우 "공고기관"으로 변경
+            if (rowData.id && rowData.id.field === "bidder") {
+                return "수요기관";
+            } else if (rowData.id && rowData.id.field === "titleLinkText"){
+                // 다른 경우에는 기본값 반환
+                return "포함단어";
+            }
+        }
+
+        //trigger AJAX load on "Load Data via AJAX" button click
+        document.getElementById("get-trigger").addEventListener("click", function(){
+            table.setData("/api/getKeyword");
+        });
+
+
+
+
+
     </script>
 </div>
 </html>

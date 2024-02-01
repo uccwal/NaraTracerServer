@@ -39,6 +39,11 @@ public class MainController {
         return "/page/postSample.html";
     }
 
+    @GetMapping("/keyword")
+    public String keyword() {
+        return "/page/keyword.html";
+    }
+
 
     private final String getTracerDataUrl = "http://localhost:8000/tracerData";
 
